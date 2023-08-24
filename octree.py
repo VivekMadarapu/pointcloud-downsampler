@@ -2,22 +2,22 @@ from point import Point
 
 
 class Octree:
-    def __init__(self, l, w, h, c: Point):
+    def __init__(self, l: float, w: float, h: float, c: Point):
         self.divided = False
         self.length = l
         self.width = w
         self.height = h
-        self.capacity = 1
+        self.capacity = 16
         self.center = Point(c.x, c.y, c.z)
         self.points: [Point] = []
-        self.children: [Octree] = []
+        self.children: [Octree] = [None, None, None, None, None, None, None, None]
 
     def contains(self, p):
         contains = False
         if (p.x <= self.center.x + self.length) and (p.x >= self.center.x - self.length) and (
                 p.y <= self.center.y + self.width) and (p.y >= self.center.y - self.width) and (
                 p.z <= self.center.z + self.height) and (p.z >= self.center.z - self.height):
-            contain = True
+            contains = True
         return contains
 
     def subdivide(self):
@@ -38,7 +38,8 @@ class Octree:
                 temp.center.z = self.center.z + temp.height
 
             self.children[i] = temp
-            self.divided = True
+
+        self.divided = True
 
     def insert(self, p):
         if not self.contains(p):
