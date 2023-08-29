@@ -89,7 +89,7 @@ if __name__ == '__main__':
     print("Points Loaded.")
 
     downsampled_points: [Point] = []
-    res_depth = 8
+    res_depth = 8  # Determines resolution of final point cloud
 
     print("Downsampling...")
     downsample(octree, 0)
@@ -101,3 +101,5 @@ if __name__ == '__main__':
             file.write(
                 str(downsampled_points[i].x) + "," + str(downsampled_points[i].y) + "," + str(
                     downsampled_points[i].z) + "\n")
+
+    print("Done.")
